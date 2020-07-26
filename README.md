@@ -1,8 +1,15 @@
 # RaffleNinja: The Twitch Giveaway/Raffle Entry Bot
 
-A dictionary attack I created, that will take the [number of Twitch accounts/windows open], [Twitch chat delay (in seconds)] and [raffle prefix keyword if any (eg: !raffle / !join)] as the input (either in the form of an integrated random number generator range, or supplying a dictionary/list file) and then enter the giveaway/raffle automatically for each account/window. This project was created in Python.
+A dictionary attack I created, that takes the following as input:
 
-**Dependencies to "pip install" before being able to run the Python files:**
+[Number of active Twitch accounts/windows]
+[Current Twitch chat delay (in seconds)]
+[Raffle prefix keyword if any (eg: !raffle / !join)]
+[Raffle expression (either a specified range of numbers, or via a supplied custom dictionary/list file)]
+
+...and then enters the giveaway/raffle automatically from each active account/window. This project was created in Python.
+
+**Dependencies you may have to "pip install" before being able to run the Python file(s):**
 
 **pynput** (for simulating key presses)
 
