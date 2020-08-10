@@ -36,7 +36,7 @@ def windowChange(windows):
         while repetitions <= iterations:
             (keyboard.press(key.tab))
             (keyboard.release(key.tab))
-            time.sleep(0.1)
+            time.sleep(0.2)
             repetitions += 1
     keyboard.release(key.alt)
     return
@@ -55,7 +55,7 @@ def enter(line, keyword):
 
 
 def generate(minunit, maxunit):
-    top = maxunit - 1
+    top = maxunit - minunit
     tempList = []
     while (len(tempList) < top):
         randNum = str(random.randrange(minunit, maxunit, 1))
@@ -97,15 +97,16 @@ if __name__ == "__main__":
                 countdown()
 
                 if maxunit > minunit:
-                    maxunit += 1                         # To include the maxunit integer as well (added this far in to not interfere with file naming string)
+                    maxunit += 1 # To include the maxunit integer as well (added this far in to not interfere with file naming string)
                     tempList = generate(minunit, maxunit)
 
-                    for element in enumerate(tempList, start=1):
-                        enter(element[1], keyword)
+                    for index, element in enumerate(tempList, start=1): # If only "element" used, then would be refering to index and element as
+                                                                        # "element[0]" and "element[1]" respectively
+                        enter(element, keyword)
                         if (windows > 1):
                             windowChange(windows)
                             time.sleep(0.1)
-                        if ((element[0]) % windows == 0):
+                        if ((index) % windows == 0):
                             time.sleep(delay)
                         else:
                             continue
@@ -129,11 +130,11 @@ if __name__ == "__main__":
                         line = line.strip()
                         tempList.append(line)
                     file.close()
-                for element in enumerate(tempList, start=1):
-                    enter(element[1], keyword)
+                for index, element in enumerate(tempList, start=1):
+                    enter(element, keyword)
                     windowChange()
                     time.sleep(0.15)
-                    if ((element[0]) % 2 == 0):
+                    if ((index) % 2 == 0):
                         time.sleep(delay)
                     else:
                         continue
