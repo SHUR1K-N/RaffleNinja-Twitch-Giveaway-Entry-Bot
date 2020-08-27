@@ -29,7 +29,7 @@ def printBanner():
     print(BANNER1), print(BANNER2), print(BANNER3)
 
 
-def windowChange(windows):
+def windowChange():
     keyboard.press(key.alt)
     repetitions = 1
     for iterations in range(1, windows):
@@ -39,10 +39,9 @@ def windowChange(windows):
             time.sleep(0.2)
             repetitions += 1
     keyboard.release(key.alt)
-    return
 
 
-def enter(line, keyword):
+def enter():
     if keyword == "":
         space = ""
     else:
@@ -51,7 +50,6 @@ def enter(line, keyword):
     keyboard.press(key.enter)
     keyboard.release(key.enter)
     time.sleep(0.1)
-    return
 
 
 def generate(minunit, maxunit):
@@ -88,23 +86,22 @@ if __name__ == "__main__":
 
             print("\nMethods:-")
             print("1. Enter a custom range of integers\n2. Supply a dictionary file")
-            decision = input("\nSelect method number: ")
+            decision = int(input("\nSelect method number: "))
 
-            if (decision == "1"):
-                minunit = int(input("\nEnter the minimum value (Default = 1): ") or '1')
+            if (decision == 1):
+                minunit = int(input("\nEnter the minimum value (Default = 1): ") or 1)
                 maxunit = int(input("Enter the maximum value: "))
 
                 countdown()
 
                 if maxunit > minunit:
                     maxunit += 1 # To include the maxunit integer as well (added this far in to not interfere with file naming string)
-                    tempList = generate(minunit, maxunit)
+                    tempList = generate()
 
-                    for index, element in enumerate(tempList, start=1): # If only "element" used, then would be refering to index and element as
-                                                                        # "element[0]" and "element[1]" respectively
+                    for index, element in enumerate(tempList, start=1):
                         enter(element, keyword)
                         if (windows > 1):
-                            windowChange(windows)
+                            windowChange()
                             time.sleep(0.1)
                         if ((index) % windows == 0):
                             time.sleep(delay)
@@ -119,7 +116,7 @@ if __name__ == "__main__":
 
                 correctInput = True
 
-            elif (decision == "2"):
+            elif (decision == 2):
                 dict = input("\nEnter dictionary file path here: ")
                 tempList = []
 
@@ -131,7 +128,7 @@ if __name__ == "__main__":
                         tempList.append(line)
                     file.close()
                 for index, element in enumerate(tempList, start=1):
-                    enter(element, keyword)
+                    enter()
                     windowChange()
                     time.sleep(0.15)
                     if ((index) % 2 == 0):
@@ -145,6 +142,7 @@ if __name__ == "__main__":
                 print("\nInvalid entry. Choose either option 1 or 2. Try again.\n")
                 continue
         except:
+            # print(e)
             print("\nOne of more of the inputs are invalid. This can happen when any spaces or other characters have been entered instead of numbers. Please try again.\n")
             continue
 
