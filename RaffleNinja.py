@@ -41,12 +41,12 @@ def windowChange():
     keyboard.release(key.alt)
 
 
-def enter():
+def enter(element):
     if keyword == "":
         space = ""
     else:
         space = " "
-    keyboard.type(keyword + space + line)
+    keyboard.type(keyword + space + element)
     keyboard.press(key.enter)
     keyboard.release(key.enter)
     time.sleep(0.1)
@@ -65,7 +65,7 @@ def generate(minunit, maxunit):
 def countdown():
     print("\nPress Enter when ready to begin 10 second countdown...", end="")
     input()
-    for int in range(0, 9):
+    for int in range(0, 3):
         winsound.Beep(350, 800)
         time.sleep(0.2)
     winsound.Beep(800, 800)
@@ -96,10 +96,10 @@ if __name__ == "__main__":
 
                 if maxunit > minunit:
                     maxunit += 1 # To include the maxunit integer as well (added this far in to not interfere with file naming string)
-                    tempList = generate()
+                    tempList = generate(minunit, maxunit)
 
                     for index, element in enumerate(tempList, start=1):
-                        enter(element, keyword)
+                        enter(element)
                         if (windows > 1):
                             windowChange()
                             time.sleep(0.1)
@@ -142,7 +142,7 @@ if __name__ == "__main__":
                 print("\nInvalid entry. Choose either option 1 or 2. Try again.\n")
                 continue
         except:
-            # print(e)
+            print(e)
             print("\nOne of more of the inputs are invalid. This can happen when any spaces or other characters have been entered instead of numbers. Please try again.\n")
             continue
 
