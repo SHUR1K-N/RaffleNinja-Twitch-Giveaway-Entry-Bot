@@ -1,4 +1,4 @@
-import time
+import time; import os
 from colorama import init
 from termcolor import colored
 from tqdm import tqdm
@@ -7,7 +7,6 @@ import pynput
 
 keyboard = pynput.keyboard.Controller()
 key = pynput.keyboard.Key
-correctInput = False
 
 BANNER1 = colored('''
              ██▀███   ▄▄▄        █████▒ █████▒██▓    ▓█████  ███▄    █  ██▓ ███▄    █  ▄▄▄██▀▀▀▄▄▄
@@ -19,9 +18,9 @@ BANNER1 = colored('''
               ░▒ ░ ▒░  ▒   ▒▒ ░ ░      ░     ░ ░ ▒  ░ ░ ░  ░░ ░░   ░ ▒░ ▒ ░░ ░░   ░ ▒░ ▒ ░▒░    ▒   ▒▒ ░
               ░░   ░   ░   ▒    ░ ░    ░ ░     ░ ░      ░      ░   ░ ░  ▒ ░   ░   ░ ░  ░ ░ ░    ░   ▒
                ░           ░  ░                  ░  ░   ░  ░         ░  ░           ░  ░   ░        ░  ░
-''', 'blue')
-BANNER2 = colored('''                                  RaffleNinja: The Twitch Giveaway/Raffle Entry Bot''', 'red')
-BANNER3 = colored('''                                 ---------------------------------------------------''', 'blue')
+               ''', 'blue')
+BANNER2 = colored('''                                RaffleNinja: The Twitch Giveaway/Raffle Entry Bot''', 'red')
+BANNER3 = colored('''                               ---------------------------------------------------''', 'blue')
 
 
 def printBanner():
@@ -63,13 +62,26 @@ def generate(minunit, maxunit):
 
 
 def countdown():
-    print("\nPress Enter when ready to begin 10 second countdown...", end="")
+    clrscr()
+    print("\nPress Enter when ready to begin a 10 second countdown...")
+    if (windows == 1):
+        print(f"Use this countdown time to initialize the {windows} text field by clicking once in it.", end="")
+    else:
+        print(f"Use this countdown time to initialize the {windows} text fields by clicking once in each of them.", end="")
     input()
-    for int in range(0, 3):
+    for int in range(1, 10):
         winsound.Beep(350, 800)
         time.sleep(0.2)
     winsound.Beep(800, 800)
     time.sleep(0.2)
+
+
+def clrscr():
+    if os.name == 'posix':
+        _ = os.system('clear')
+    else:
+        _ = os.system('cls')
+    printBanner()
 
 
 ############### Main ###############
@@ -78,74 +90,97 @@ if __name__ == "__main__":
 
     printBanner()
 
-    while (correctInput is False):
+    while (True):
         try:
-            windows = int(input("Input the number of accounts (windows) entering through (Default = 1): ") or 1)
+            windows = int(input("\nInput the number of accounts (windows) entering through (Default = 1): ") or 1)
             delay = float(input("Input the chat delay in seconds (Default = 0.3s): ") or 0.3)
-            keyword = input(("Input the chat keyword (Default = blank): ") or "")
 
-            print("\nMethods:-")
-            print("1. Enter a custom range of integers\n2. Supply a dictionary file")
-            decision = int(input("\nSelect method number: "))
+            if (windows < 1):
+                windows = 1
+            break
+        except:
+            clrscr()
+            print("\nInvalid entry (not a float/integer). Please try again.\n")
+            continue
 
-            if (decision == 1):
-                minunit = int(input("\nEnter the minimum value (Default = 1): ") or 1)
-                maxunit = int(input("Enter the maximum value: "))
+    keyword = input(("Input the chat keyword (Default = blank): ") or "")
+
+    while (True):
+        print("\n\nMethods:-")
+        print("1. Enter a custom range of integers\n2. Supply a dictionary file")
+        decision = input("\nSelect method number: ")
+
+        if (decision == "1"):
+            while (True):
+                try:
+                    minunit = int(input("\nEnter the minimum value (Default = 1): ") or 1)
+                    maxunit = int(input("Enter the maximum value: "))
+                    break
+
+                except:
+                    clrscr()
+                    print("\nInvalid entry (not an integer). Please try again.\n")
+                    continue
+
+            if maxunit > minunit:
+                maxunit += 1 # To include the maxunit integer as well (added this far in to not interfere with file naming string)
+                tempList = generate(minunit, maxunit)
 
                 countdown()
+                for index, element in enumerate(tempList, start=1):
+                    enter(element)
+                    if (windows > 1):
+                        windowChange()
+                        time.sleep(0.1)
+                    if ((index) % windows == 0):
+                        time.sleep(delay)
+                    elif (windows == 1):
+                        continue
 
-                if maxunit > minunit:
-                    maxunit += 1 # To include the maxunit integer as well (added this far in to not interfere with file naming string)
-                    tempList = generate(minunit, maxunit)
+            elif (minunit == maxunit):
+                clrscr()
+                print("\nThe minimum value cannot be equal to the maximum value.")
+                continue
 
-                    for index, element in enumerate(tempList, start=1):
-                        enter(element)
-                        if (windows > 1):
-                            windowChange()
-                            time.sleep(0.1)
-                        if ((index) % windows == 0):
-                            time.sleep(delay)
-                        else:
-                            continue
+            elif (minunit > maxunit):
+                clrscr()
+                print("\nThe minimum value cannot be greater than the maximum value.")
+                continue
 
-                elif (minunit == maxunit):
-                    print("\nThe minimum value cannot be equal to the maximum value.")
+        elif (decision == "2"):
+            while (True):
 
-                elif (minunit > maxunit):
-                    print("\nThe minimum value cannot be greater than the maximum value.")
-
-                correctInput = True
-
-            elif (decision == 2):
                 dict = input("\nEnter dictionary file path here: ")
                 tempList = []
 
-                countdown()
+                if (os.path.isfile(dict) is True):
+                    break
+                else:
+                    clrscr()
+                    print("\nEither file does not exist or invalid path entered. Try again.\n")
+                    continue
 
-                with open(dict, "r") as file:
-                    for line in file:
-                        line = line.strip()
-                        tempList.append(line)
-                    file.close()
-                for index, element in enumerate(tempList, start=1):
-                    enter()
-                    windowChange()
-                    time.sleep(0.15)
-                    if ((index) % 2 == 0):
-                        time.sleep(delay)
-                    else:
-                        continue
+            with open(dict, "r") as file:
+                for line in file:
+                    line = line.strip()
+                    tempList.append(line)
+            countdown()
+            for index, element in enumerate(tempList, start=1):
+                enter(element)
+                windowChange()
+                time.sleep(0.15)
+                if ((index) % 2 == 0):
+                    time.sleep(delay)
+                else:
+                    continue
 
-                correctInput = True
-
-            else:
-                print("\nInvalid entry. Choose either option 1 or 2. Try again.\n")
-                continue
-        except:
-            print(e)
-            print("\nOne of more of the inputs are invalid. This can happen when any spaces or other characters have been entered instead of numbers. Please try again.\n")
+        else:
+            clrscr()
+            print("\nInvalid entry. Choose either option 1 or 2. Try again.\n")
             continue
+        break
 
+    clrscr()
     print("\n\nThe task completed successfully.")
-    print("Press any key to exit.")
+    print("Press Enter to exit.")
     input()
