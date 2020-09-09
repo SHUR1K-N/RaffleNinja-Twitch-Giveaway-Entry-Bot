@@ -1,7 +1,7 @@
 # RaffleNinja: The Twitch Giveaway/Raffle Entry Bot
 
 ## Description & Usage
-A dictionary attack I created, that takes the following as input:
+A dictionary attack implementation, that takes the following as input:
 
 - Number of active Twitch accounts/windows
 - Current Twitch chat delay (in seconds)
