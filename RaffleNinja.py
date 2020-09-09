@@ -35,7 +35,7 @@ def windowChange():
         while repetitions <= iterations:
             (keyboard.press(key.tab))
             (keyboard.release(key.tab))
-            time.sleep(0.2)
+            time.sleep(0.1)
             repetitions += 1
     keyboard.release(key.alt)
 
