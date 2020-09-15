@@ -17,8 +17,7 @@ BANNER1 = colored('''
             ░ ▒▓ ░▒▓░ ▒▒   ▓▒█░ ▒ ░    ▒ ░   ░ ▒░▓  ░░░ ▒░ ░░ ▒░   ▒ ▒ ░▓  ░ ▒░   ▒ ▒  ▒▓▒▒░   ▒▒   ▓▒█░
               ░▒ ░ ▒░  ▒   ▒▒ ░ ░      ░     ░ ░ ▒  ░ ░ ░  ░░ ░░   ░ ▒░ ▒ ░░ ░░   ░ ▒░ ▒ ░▒░    ▒   ▒▒ ░
               ░░   ░   ░   ▒    ░ ░    ░ ░     ░ ░      ░      ░   ░ ░  ▒ ░   ░   ░ ░  ░ ░ ░    ░   ▒
-               ░           ░  ░                  ░  ░   ░  ░         ░  ░           ░  ░   ░        ░  ░
-               ''', 'blue')
+               ░           ░  ░                  ░  ░   ░  ░         ░  ░           ░  ░   ░        ░  ░''', 'blue')
 BANNER2 = colored('''                                RaffleNinja: The Twitch Giveaway/Raffle Entry Bot''', 'red')
 BANNER3 = colored('''                               ---------------------------------------------------''', 'blue')
 
@@ -92,8 +91,8 @@ if __name__ == "__main__":
 
     while (True):
         try:
-            windows = int(input("\nInput the number of accounts (windows) entering through (Default = 1): ") or 1)
-            delay = float(input("Input the chat delay in seconds (Default = 0.3s): ") or 0.3)
+            windows = int(input("\nEnter the number of accounts (windows) entering through (Default = 1): ") or 1)
+            delay = float(input("Enter the chat delay in seconds (Default = 0.3s): ") or 0.3)
 
             if (windows < 1):
                 windows = 1
@@ -103,7 +102,7 @@ if __name__ == "__main__":
             print("\nInvalid entry (not a float/integer). Please try again.\n")
             continue
 
-    keyword = input(("Input the chat keyword (Default = blank): ") or "")
+    keyword = input(("Enter the chat keyword (Default = blank): ") or "")
 
     while (True):
         print("\n\nMethods:-")
