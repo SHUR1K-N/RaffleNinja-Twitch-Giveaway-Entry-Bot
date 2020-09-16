@@ -12,7 +12,7 @@ A dictionary attack implementation, that takes the following as input:
 
 This project was created in Python, for personal use.
 
-## Dependencies to "pip install"
+## Dependencies to PIP-Install
 - **pynput** (for simulating key presses)
 - **colorama** (for colors)
 - **termcolor** (for colors)
