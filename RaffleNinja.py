@@ -1,11 +1,11 @@
 import time; import os
-from colorama import init
+import colorama
 from termcolor import colored
 from tqdm import tqdm
 import random; import winsound
 import pynput
 
-init() # Initilizing colors
+colorama.init()
 
 keyboard = pynput.keyboard.Controller()
 key = pynput.keyboard.Key
@@ -63,11 +63,13 @@ def generate(minunit, maxunit):
 
 def countdown():
     clrscr()
-    print("\nPress Enter when ready to begin a 10 second countdown...")
+    print("\nPress Enter when ready to begin a 10 second countdown (with beeps).")
     if (windows == 1):
-        print(f"Use this countdown time to initialize the {windows} text field by clicking once in it.", end="")
+        print(f"\nUse this countdown time to initialize the {windows} text field by clicking inside it once.")
     else:
-        print(f"Use this countdown time to initialize the {windows} text fields by clicking once in each of them.", end="")
+        print(f"\nUse this countdown time to initialize the {windows} text fields by clicking once inside each of them.")
+    print("Once this countdown is over, let go of your keyboard & mouse and let RaffleNinja take over for you.")
+    print(colored("\nNOTE: You may terminate this program at any time by pressing CTRL + C with this window in focus.", "yellow"), end="")
     input()
     for int in range(1, 10):
         winsound.Beep(350, 800)
