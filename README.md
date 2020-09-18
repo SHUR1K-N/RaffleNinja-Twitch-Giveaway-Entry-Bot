@@ -10,6 +10,11 @@ A dictionary attack implementation, that takes the following as input:
 
 ...and then enters the giveaway/raffle automatically from each active account/window, without any further user interference.
 
+<div align="center">
+<img src="https://github.com/SHUR1K-N/RaffleNinja-Twitch-Raffle-Entry-Bot/blob/master/Images/Example.png" >
+<p>Example Execution</p>
+</div>
+
 This project was created in Python, for personal use.
 
 ## Dependencies to PIP-Install
