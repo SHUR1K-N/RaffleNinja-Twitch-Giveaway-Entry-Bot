@@ -1,9 +1,7 @@
-import time; import os
-import colorama
+import random; import pynput
+import winsound; import time; import os
 from termcolor import colored
-from tqdm import tqdm
-import random; import winsound
-import pynput
+import colorama
 
 colorama.init()
 
