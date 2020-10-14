@@ -1,4 +1,4 @@
-# RaffleNinja: The Twitch Giveaway/Raffle Entry Bot
+# RaffleNinja: Twitch Giveaway/Raffle Entry Bot
 
 ## Description & Usage
 A dictionary attack implementation, that takes the following as input:
