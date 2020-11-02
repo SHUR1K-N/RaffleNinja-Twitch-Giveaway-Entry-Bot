@@ -1,0 +1,3 @@
+pynput 		# for simulating key presses
+colorama 	# for colors
+termcolor 	# for colors
