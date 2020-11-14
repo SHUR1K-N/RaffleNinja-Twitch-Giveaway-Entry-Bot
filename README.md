@@ -11,7 +11,7 @@ A dictionary attack implementation, that takes the following as input:
 ...and then enters the giveaway/raffle automatically from each active account/window, without any further user interference.
 
 <div align="center">
-<img src="https://github.com/SHUR1K-N/RaffleNinja-Twitch-Raffle-Entry-Bot/blob/master/Images/Example.png" >
+<img src="https://raw.githubusercontent.com/SHUR1K-N/RaffleNinja-Twitch-Raffle-Entry-Bot/master/Images/Example.png" >
 <p>Example Execution</p>
 </div>
 
