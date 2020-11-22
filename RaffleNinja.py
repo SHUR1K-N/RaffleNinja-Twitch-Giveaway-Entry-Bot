@@ -8,6 +8,8 @@ colorama.init()
 keyboard = pynput.keyboard.Controller()
 key = pynput.keyboard.Key
 
+numSet = set()
+
 BANNER1 = colored('''
    ██▀███   ▄▄▄        █████▒ █████▒██▓    ▓█████  ███▄    █  ██▓ ███▄    █  ▄▄▄██▀▀▀▄▄▄
   ▓██ ▒ ██▒▒████▄    ▓██   ▒▓██   ▒▓██▒    ▓█   ▀  ██ ▀█   █ ▓██▒ ██ ▀█   █    ▒██  ▒████▄
@@ -52,12 +54,10 @@ def enter(element):
 
 def generate(minunit, maxunit):
     top = maxunit - minunit
-    tempList = []
-    while (len(tempList) < top):
+    while (len(numSet) < top):
         randNum = str(random.randrange(minunit, maxunit, 1))
-        if randNum not in tempList:
-            tempList.append(randNum)
-    return(tempList)
+        numSet.add(randNum)
+    return(numSet)
 
 
 def countdown():
@@ -130,10 +130,10 @@ if __name__ == "__main__":
 
                 if maxunit > minunit:
                     maxunit += 1 # To include the maxunit integer as well (added this far in to not interfere with file naming string)
-                    tempList = generate(minunit, maxunit)
+                    numSet = generate(minunit, maxunit)
 
                     countdown()
-                    for index, element in enumerate(tempList, start=1):
+                    for index, element in enumerate(numSet, start=1):
                         enter(element)
                         if (windows > 1):
                             windowChange()
@@ -173,13 +173,13 @@ if __name__ == "__main__":
                 countdown()
                 for index, element in enumerate(tempList, start=1):
                     enter(element)
-                    windowChange()
-                    time.sleep(0.15)
-                    if ((index) % 2 == 0):
+                    if (windows > 1):
+                        windowChange()
+                        time.sleep(0.1)
+                    if ((index) % windows == 0):
                         time.sleep(delay)
-                    else:
+                    elif (windows == 1):
                         continue
-
             else:
                 clrscr()
                 print("\nInvalid entry. Choose either option 1 or 2. Try again.\n")
