@@ -20,4 +20,4 @@ A unique dictionary attack implementation that enters a Twitch chat giveaway aut
 
 ------------
 
-My website: http://bit.do/SHUR1KN
+My website: https://TheComputerNoob.com
