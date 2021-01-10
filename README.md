@@ -1,7 +1,7 @@
 # RaffleNinja: Twitch Giveaway Entry Bot
 
 ## Description & Usage
-A unique dictionary attack implementation that enters a Twitch giveaway automatically from a single or multiple Twitch account window(s), without any further user intervention required after the following user inputs:
+A unique dictionary attack implementation that enters a Twitch chat giveaway automatically from a single or multiple Twitch account window(s), without any further user intervention required after the following user inputs:
 
 - Number of active Twitch account windows
 - Current Twitch chat delay (in seconds)
